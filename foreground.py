@@ -5,13 +5,10 @@ import sys
 
 img = cv2.imread(sys.argv[1])
 edgeImg = cv2.Canny(img,10,150)
-cv2.imwrite('edge.png',edgeImg)
 kernel = np.ones((3,3),np.uint8)
 grayDilated = cv2.dilate(edgeImg,kernel)
-cv2.imwrite('dilated.png',grayDilated)
 kernel = np.ones((2,2),np.uint8)
 grayErode = cv2.erode(grayDilated,kernel)
-cv2.imwrite('eroded.png',grayErode)
 floodOut = img
 height,width = grayErode.shape[:2]
 queue = Queue.Queue()
