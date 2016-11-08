@@ -4,14 +4,30 @@ import Queue
 import sys
 
 def segmentImage(imgPath):
+    '''
+        PARAMETERS:
+            imgPath (string): path of image to be extracted.
+        OUTPUT:
+            floodOut (numpy.ndarray): Output image with foreground extracted.
+    '''
+
     img = cv2.imread(imgPath)
+
+    '''Application of Canny Edge Detector'''
     edgeImg = cv2.Canny(img,10,120)
+    #cv2.imwrite("images/canny.png",edgeImg)
+
+    '''Dilation of canny output with a kernel of size (3x3)'''
     kernel = np.ones((3,3),np.uint8)
     grayDilated = cv2.dilate(edgeImg,kernel)
-    cv2.imwrite("images/dilate.png",grayDilated)
+    #cv2.imwrite("images/dilate.png",grayDilated)
+
+    '''Erosion of dilated image with a kernel of size (2x2)'''
     kernel = np.ones((2,2),np.uint8)
     grayErode = cv2.erode(grayDilated,kernel)
-    cv2.imwrite("images/eroded.png",grayErode)
+    #cv2.imwrite("images/eroded.png",grayErode)
+
+    '''Breadth first search in the image to extract final output'''
     floodOut = img
     height,width = grayErode.shape[:2]
     queue = Queue.Queue()
@@ -77,6 +93,6 @@ def segmentImage(imgPath):
     return floodOut
 
 if __name__=="__main__":
-    imgPath = "images/input.jpg"
+    imgPath = "images/input3.jpg"
     floodOut = segmentImage(imgPath)
-    cv2.imwrite("images/result.png",floodOut)
+    cv2.imwrite("images/result3p.png",floodOut)
