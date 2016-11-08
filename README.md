@@ -1,13 +1,10 @@
-# fore-seg
+# Foreground Segmentation for Images with Uniform Background
 
-This is a repository to extract the foreground from background in relatively noiseless images. A set of relatively noiseless images can be found here - https://goo.gl/QfSzz0
+This module was developed as part of [marooner](https://github.com/amberm291/marooner-final). This module extarcts the background from an image with a uniform background, by converting the entire background to a RGB value of `(0,0,0)`. For an input image like this 
 
-To get an extracted image from an input image, just run the following command:
+![clean input](https://raw.githubusercontent.com/amberm291/ForegroundSegmentation/images/input.jpg)
 
-    python foreground.py [path to input folder] 
+it gives output as
 
-This will create a file called output.png in your repo directory.
+![result image](https://raw.githubusercontent.com/amberm291/ForegroundSegmentation/images/result.png)
 
-Known Bugs:
-1. Will not work if the background is not noiseless.
-2. Gives a buggy output if the foreground and background is very similar.
